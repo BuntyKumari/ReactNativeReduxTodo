@@ -28,8 +28,8 @@ const todo = (state=initialState,action)=>{
         }
 
         case 'UPDATE_TASK':
-            console.log(action.text);
-            state.noteArray.splice(action.index,1,action.text);
+            console.log(action.id);
+            state.noteArray.splice(action.id,1,action.text);
             return{
                 noteArray: [...state.noteArray]
             }
