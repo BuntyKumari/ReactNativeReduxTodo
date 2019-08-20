@@ -7,22 +7,42 @@ import {
   ScrollView,
   TouchableOpacity
 } from "react-native";
+import EditScreen from "./EditScreen";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import Main from './Main';
 
 export default class Note extends Component {
   render() {
+    // const AppNavigator = createStackNavigator({
+    //   Notes: Note,
+    //   Edit: EditScreen,
+    //   Main: Main,
+    // });
     
-    return this.props.arrays.map((val,index) => {
+    // createAppContainer(AppNavigator);
+    console.log("this.props.arrays", this.props.arrays);
+    return this.props.arrays.map((val, index) => {
       return (
         <React.Fragment>
           <View key={index} style={styles.note}>
             <Text style={styles.noteText}>{val}</Text>
+
             <TouchableOpacity
-              onPress={()=>this.props.deleteMethod(index)}
+              style={styles.noteEdit}
+              onPress={() => {
+                // debugger;
+                this.props.navigation.navigate('Edit',{val:val,id:index});
+              }}
+            >
+              <Text style={styles.noteEditText}>E</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => this.props.deleteMethod(index)}
               style={styles.noteDelete}
             >
               <Text style={styles.noteDeleteText}>X</Text>
             </TouchableOpacity>
-            <TouchableOpacity></TouchableOpacity>
           </View>
         </React.Fragment>
       );
@@ -30,6 +50,7 @@ export default class Note extends Component {
   }
 }
 
+// export default Note
 const styles = StyleSheet.create({
   note: {
     position: "relative",
@@ -53,7 +74,20 @@ const styles = StyleSheet.create({
     bottom: 10,
     right: 10
   },
+  noteEdit: {
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2980b9",
+    padding: 10,
+    top: 10,
+    bottom: 10,
+    right: 40
+  },
   noteDeleteText: {
+    color: "white"
+  },
+  noteEditText: {
     color: "white"
   }
 });

@@ -1,7 +1,8 @@
 
 
 const initialState={
-        noteArray:[]
+        noteArray:[],
+        
 }
 
 
@@ -25,6 +26,13 @@ const todo = (state=initialState,action)=>{
             
             noteArray: [...state.noteArray]
         }
+
+        case 'UPDATE_TASK':
+            console.log(action.text);
+            state.noteArray.splice(action.index,1,action.text);
+            return{
+                noteArray: [...state.noteArray]
+            }
             
         default:
             return state;
